@@ -20,4 +20,11 @@ public class InvoiceServiceTest {
         double totalFare = invoiceService.calculateFare(0, 5);
         Assert.assertEquals(25.0, totalFare, 0.0);
     }
+	
+	@Test
+    public void givenDistanceAndTime_whenCalculateFareIsLessThan5_ShouldReturnTotalFareAs5() {
+		CabInvoiceGenerator invoiceService = new CabInvoiceGenerator();
+        double totalFare = invoiceService.calculateFare(0.1, 1);
+        Assert.assertEquals(5, totalFare, 0.0);
+    }
 }
