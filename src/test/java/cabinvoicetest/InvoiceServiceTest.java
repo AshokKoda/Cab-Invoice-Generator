@@ -4,6 +4,8 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import cabinvoicegenerator.CabInvoiceGenerator;
+import entity.InvoiceSummary;
+import entity.Rides;
 
 public class InvoiceServiceTest {
 
@@ -27,4 +29,15 @@ public class InvoiceServiceTest {
         double totalFare = invoiceService.calculateFare(0.1, 1);
         Assert.assertEquals(5, totalFare, 0.0);
     }
+	
+	 @Test
+	    public void givenMultipleRides_whenCalculateFare_ShouldReturnAggregateTotalFare() {
+		 CabInvoiceGenerator invoiceService = new CabInvoiceGenerator();
+	        Rides[] rides = {new Rides(2.0, 5),
+	                new Rides(1.0, 5),
+	                new Rides(0.1, 1)};
+	        InvoiceSummary expectedSummary = new InvoiceSummary(3, 45);
+	        InvoiceSummary summary = invoiceService.calculateFare(rides);
+	        Assert.assertEquals(expectedSummary, summary);
+	    }
 }
